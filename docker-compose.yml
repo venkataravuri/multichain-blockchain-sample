@@ -1,0 +1,81 @@
+version: "3"
+
+services:
+
+  ubuntu:
+    build: ./docker/ubuntu
+    container_name: ubuntu
+    networks:
+      - multichain
+  
+  multichain-base:
+    build: ./docker/multichain-base
+    container_name: multichain-base
+    networks:
+      - multichain
+    links:
+      - ubuntu
+  
+  india-primary-node:
+    build: ./docker/india-primary-node
+    container_name: india-primary-node
+    stdin_open: true
+    tty: true
+    #volumes:
+    #  - "//c/docker-data-volumes/india-primary-node/multichain-data:/multichain-data"
+    networks:
+      - multichain
+    ports:
+        - "7447:7447"
+        - "7000:7000"
+    expose:
+        - 7447
+        - 7000
+    links:
+        - multichain-base
+
+  india-secondary-node:
+    build: ./docker/india-secondary-node
+    container_name: india-secondary-node
+    stdin_open: true
+    tty: true
+    networks:
+      - multichain
+    ports:
+      - "8447:8447"
+      - "8000:8000"
+    expose:
+        - 8447
+        - 8000
+    links:
+        - multichain-base
+  
+  multichain-explorer:
+    build: ./docker/multichain-explorer
+    container_name: multichain-explorer
+    stdin_open: true
+    tty: true
+    networks:
+      - multichain
+    ports:
+      - "2750:2750"
+    expose:
+      - 2750
+    links:
+      - india-primary-node
+
+  multichain-web-demo:
+    build: ./docker/multichain-web-demo
+    container_name: multichain-web-demo
+    stdin_open: true
+    tty: true
+    networks:
+      - multichain
+    ports:
+      - "80:80"
+    links:
+      - india-primary-node
+      - india-secondary-node
+
+networks:
+    multichain:

@@ -1,0 +1,13 @@
+﻿default.name=Default                   # name to display in the web interface
+default.rpchost=india-primary-node              # IP address of MultiChain node
+default.rpcport=7000                  # see rpc-port from chain parameters
+default.rpcuser=multichainrpc          # username for RPC from multichain.conf
+default.rpcpassword=79pgKQusiH3VDVpyzsM6e3kRz6gWNctAwgJvymG3iiuz                 # password for RPC from multichain.conf
+
+# You can configure support for other nodes using a word other than 'default':
+#
+india.name=India Secondary Node                   # name to display in the web interface
+india.rpchost=india-secondary-node              # IP address of MultiChain node
+india.rpcport=8000                  # see rpc-port from chain parameters
+india.rpcuser=multichainrpc          # username for RPC from multichain.conf
+india.rpcpassword=79pgKQusiH3VDVpyzsM6e3kRz6gWNctAwgJvymG3iiuz                 # password for RPC from multichain.conf
